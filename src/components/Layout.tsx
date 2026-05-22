@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
-type Page = 'home' | 'routes' | 'add' | 'edit' | 'settings';
+type Page = 'home' | 'routes' | 'add' | 'edit' | 'planner' | 'settings';
 
 interface LayoutProps {
   children: (page: Page, setPage: (p: Page) => void) => React.ReactNode;
@@ -9,6 +9,7 @@ interface LayoutProps {
 
 const navItems = [
   { id: 'home' as Page, label: 'Главная', icon: 'Home' },
+  { id: 'planner' as Page, label: 'Планировщик', icon: 'GitBranch' },
   { id: 'routes' as Page, label: 'Маршруты', icon: 'Map' },
   { id: 'add' as Page, label: 'Добавить', icon: 'Plus' },
   { id: 'edit' as Page, label: 'Редактор', icon: 'Edit3' },

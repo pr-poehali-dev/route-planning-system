@@ -1,6 +1,6 @@
 import Icon from '@/components/ui/icon';
 
-type Page = 'home' | 'routes' | 'add' | 'edit' | 'settings';
+type Page = 'home' | 'routes' | 'add' | 'edit' | 'planner' | 'settings';
 
 interface HomePageProps {
   setPage: (p: Page) => void;
@@ -104,9 +104,9 @@ export default function HomePage({ setPage }: HomePageProps) {
       {/* Quick actions */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
-          { icon: 'FileText', title: 'Импорт GPX', desc: 'Загрузите файл маршрута', page: 'add' as Page },
+          { icon: 'GitBranch', title: 'Планировщик', desc: 'Построить по участкам', page: 'planner' as Page },
+          { icon: 'FileText', title: 'Добавить участок', desc: 'Новый маршрут в сеть', page: 'add' as Page },
           { icon: 'Edit3', title: 'Редактировать', desc: 'Изменить существующий', page: 'edit' as Page },
-          { icon: 'Share2', title: 'Поделиться', desc: 'Отправить ссылку', page: 'routes' as Page },
         ].map((action) => (
           <button
             key={action.title}
