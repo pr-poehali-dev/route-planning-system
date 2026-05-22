@@ -6,13 +6,6 @@ interface HomePageProps {
   setPage: (p: Page) => void;
 }
 
-const stats = [
-  { label: 'Маршрутов создано', value: '24', icon: 'Route', color: 'text-primary' },
-  { label: 'Точек на карте', value: '187', icon: 'MapPin', color: 'text-yellow-400' },
-  { label: 'Километров', value: '3 240', icon: 'TrendingUp', color: 'text-green-400' },
-  { label: 'Активных сегодня', value: '5', icon: 'Activity', color: 'text-blue-400' },
-];
-
 const recentRoutes = [
   { name: 'Москва → Санкт-Петербург', distance: '714 км', points: 8, date: '20 мая', type: 'highway' },
   { name: 'Центр → Аэропорт Шереметьево', distance: '38 км', points: 4, date: '19 мая', type: 'city' },
@@ -72,23 +65,6 @@ export default function HomePage({ setPage }: HomePageProps) {
         <div className="absolute bottom-4 right-6 opacity-15">
           <Icon name="Navigation" size={120} className="text-background" />
         </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, i) => (
-          <div
-            key={stat.label}
-            className="card-dark rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <div className={`${stat.color} mb-3 group-hover:scale-110 transition-transform`}>
-              <Icon name={stat.icon} size={22} />
-            </div>
-            <p className="font-oswald text-2xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-xs text-muted-foreground font-golos mt-1">{stat.label}</p>
-          </div>
-        ))}
       </div>
 
       {/* Recent routes */}

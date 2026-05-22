@@ -1,5 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
+
+const THEMES = [
+  {
+    id: 'fire',
+    label: 'Огонь',
+    desc: 'Оранжево-жёлтый',
+    from: '#FF8C00',
+    to: '#FFD700',
+  },
+  {
+    id: 'ocean',
+    label: 'Океан',
+    desc: 'Голубой',
+    from: '#0EA5E9',
+    to: '#06B6D4',
+  },
+  {
+    id: 'forest',
+    label: 'Лес',
+    desc: 'Зелёный',
+    from: '#22C55E',
+    to: '#84CC16',
+  },
+  {
+    id: 'sunset',
+    label: 'Закат',
+    desc: 'Розово-красный',
+    from: '#F43F8F',
+    to: '#F97316',
+  },
+  {
+    id: 'arctic',
+    label: 'Полярная',
+    desc: 'Синий',
+    from: '#3B82F6',
+    to: '#22D3EE',
+  },
+];
 
 export default function SettingsPage() {
   const [apiKey, setApiKey] = useState('');
@@ -11,6 +49,13 @@ export default function SettingsPage() {
   const [showDistance, setShowDistance] = useState(true);
   const [showMarkers, setShowMarkers] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return document.documentElement.getAttribute('data-theme') || 'fire';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const handleSave = () => {
     setSaved(true);
@@ -31,6 +76,43 @@ export default function SettingsPage() {
       <div className="mb-6">
         <h2 className="font-oswald text-2xl font-bold text-foreground tracking-wide mb-1">Настройки</h2>
         <p className="text-muted-foreground font-golos text-sm">Параметры интерфейса и карты</p>
+      </div>
+
+      {/* Theme picker */}
+      <div className="card-dark rounded-xl p-5">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-lg gradient-orange flex items-center justify-center">
+            <Icon name="Palette" size={16} className="text-background" />
+          </div>
+          <div>
+            <h3 className="font-oswald text-base font-semibold text-foreground tracking-wide">Цветовая тема</h3>
+            <p className="text-xs text-muted-foreground font-golos">Изменяется мгновенно</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-5 gap-2">
+          {THEMES.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setTheme(t.id)}
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl border transition-all ${
+                theme === t.id
+                  ? 'border-primary bg-primary/10'
+                  : 'border-border hover:border-border/60 bg-muted/40'
+              }`}
+            >
+              <div
+                className="w-9 h-9 rounded-lg flex-shrink-0 shadow-md"
+                style={{ background: `linear-gradient(135deg, ${t.from} 0%, ${t.to} 100%)` }}
+              />
+              <span className={`text-xs font-golos font-medium leading-tight text-center ${theme === t.id ? 'text-primary' : 'text-muted-foreground'}`}>
+                {t.label}
+              </span>
+              {theme === t.id && (
+                <Icon name="Check" size={12} className="text-primary -mt-1" />
+              )}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* API Key */}
