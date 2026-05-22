@@ -37,6 +37,20 @@ const THEMES = [
     from: '#3B82F6',
     to: '#22D3EE',
   },
+  {
+    id: 'black',
+    label: 'Чёрная',
+    desc: 'Чистый чёрный',
+    from: '#888888',
+    to: '#555555',
+  },
+  {
+    id: 'white',
+    label: 'Белая',
+    desc: 'Светлая',
+    from: '#222222',
+    to: '#555555',
+  },
 ];
 
 export default function SettingsPage() {
@@ -89,7 +103,7 @@ export default function SettingsPage() {
             <p className="text-xs text-muted-foreground font-golos">Изменяется мгновенно</p>
           </div>
         </div>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
           {THEMES.map(t => (
             <button
               key={t.id}
